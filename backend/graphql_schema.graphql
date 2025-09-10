@@ -1,0 +1,51 @@
+type Query {
+  me: User
+  conversations: [Conversation!]
+}
+
+type Mutation {
+  register(username: String!, display_name: String!, password: String!): AuthPayload
+  login(username: String!, password: String!): AuthPayload
+  createConversation(title: String!, participant_ids: [ID!]!): Conversation
+  sendMessage(input: MessageInput!): MessagePayload
+}
+
+type User {
+  id: ID!
+  username: String!
+  display_name: String
+}
+
+type Conversation {
+  id: ID!
+  title: String!
+  is_group: Boolean!
+  participants: [User!]
+  messages: [Message!]
+}
+
+type Message {
+  id: ID!
+  conversation_id: ID!
+  sender_id: ID!
+  content: String!
+  attachment_url: String
+  created_at: String!
+}
+
+input MessageInput {
+  conversation_id: ID!
+  content: String!
+  attachment_filename: String
+}
+
+type AuthPayload {
+  success: Boolean!
+  token: String
+  user: User
+}
+
+type MessagePayload {
+  success: Boolean!
+  message: Message
+}
