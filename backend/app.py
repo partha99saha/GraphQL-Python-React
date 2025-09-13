@@ -20,7 +20,7 @@ Base.metadata.create_all(bind=engine)
 socketio = SocketIO(app, cors_allowed_origins="*", message_queue=Config.REDIS_URL)
 
 # Playground setup
-explorer_html = ExplorerPlayground().html(title="HeyBro Chat API")
+explorer_html = ExplorerPlayground().html('')
 
 # -----------------------------
 # GraphQL Routes
